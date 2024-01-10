@@ -3,7 +3,7 @@ const answerInput = document.getElementById('answerInput');
 const question = document.getElementById('question');
 
 const questions = [
-    { question: 'What is 2 + 2?', answer: '4' },
+    { question: 'how to make gobi?', answer: 'ask chef gopi' },
     { question: 'What is the capital of France?', answer: 'Paris' },
     // Add more questions and answers here
 ];
