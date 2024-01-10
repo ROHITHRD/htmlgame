@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Car Racing Game</title>
+    <title>Mind Game</title>
     <style>
         /* Basic styling for game elements */
         body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,13 +15,33 @@
             background-color: #f0f0f0;
         }
 
-        canvas {
-            border: 2px solid #333;
+        #gameContainer {
+            text-align: center;
+        }
+
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #answerInput {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #submitBtn {
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="1280" height="720"></canvas>
+    <div id="gameContainer">
+        <div id="question">What is 2 + 2?</div>
+        <input type="text" id="answerInput">
+        <button id="submitBtn">Submit Answer</button>
+    </div>
     <script src="game.js"></script>
 </body>
 </html>
