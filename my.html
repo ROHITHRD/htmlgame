@@ -1,71 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Basic Graphic Game</title>
+    <meta charset="UTF-8">
+    <title>Snake Game</title>
     <style>
-        /* Basic styling for the canvas */
+        /* Basic styling for the game */
         body {
             margin: 0;
-            overflow: hidden;
-        }
-        canvas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #f0f0f0;
-            display: block;
-            margin: auto;
+        }
+
+        canvas {
+            border: 1px solid #333;
+            background-color: #ddd;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let x = canvas.width / 2;
-        let y = canvas.height / 2;
-        let dx = 2;
-        let dy = -2;
-        const ballRadius = 10;
-
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = '#0095DD';
-            ctx.fill();
-            ctx.closePath();
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBall();
-
-            x += dx;
-            y += dy;
-
-            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-            }
-            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-                dy = -dy;
-            }
-
-            requestAnimationFrame(draw);
-        }
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'ArrowRight') {
-                dx = 2;
-            } else if (event.key === 'ArrowLeft') {
-                dx = -2;
-            } else if (event.key === 'ArrowUp') {
-                dy = -2;
-            } else if (event.key === 'ArrowDown') {
-                dy = 2;
-            }
-        });
-
-        draw();
-    </script>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script src="game.js"></script>
 </body>
 </html>
