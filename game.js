@@ -2,11 +2,11 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const box = 20;
 
-let snake = [{ x: 10 * box, y: 10 * box }];
-let food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
+let snake = [{x: 9 * box, y: 10 * box}];
+let food = {x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box};
 let score = 0;
 
-let d = 'RIGHT';
+let d;
 
 document.addEventListener('keydown', direction);
 
@@ -20,6 +20,12 @@ function direction(event) {
     } else if (event.keyCode === 40 && d !== 'UP') {
         d = 'DOWN';
     }
+}
+
+function collision(head, array) {
+    return array.some(segment => {
+        return segment.x === head.x && segment.y === head.y;
+    });
 }
 
 function draw() {
@@ -46,12 +52,23 @@ function draw() {
 
     if (snakeX === food.x && snakeY === food.y) {
         score++;
-        food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
+        food = {x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box};
     } else {
         snake.pop();
     }
 
-    const newHead = { x: snakeX, y: snakeY };
+    const newHead = {x: snakeX, y: snakeY};
+
+    if (
+        snakeX < box || snakeX > 19 * box ||
+        snakeY < box || snakeY > 19 * box ||
+        collision(newHead, snake)
+    ) {
+        clearInterval(game);
+        alert('Game Over!');
+        window.location.reload(); // Reload the page to restart the game
+    }
+
     snake.unshift(newHead);
 
     ctx.fillStyle = 'white';
@@ -60,4 +77,3 @@ function draw() {
 }
 
 const game = setInterval(draw, 100);
-
