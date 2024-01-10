@@ -1,28 +1,38 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const submitBtn = document.getElementById('submitBtn');
+const answerInput = document.getElementById('answerInput');
+const question = document.getElementById('question');
 
-const carWidth = 60;
-const carHeight = 100;
-let carX = canvas.width / 2 - carWidth / 2;
-let carY = canvas.height - carHeight - 20;
+const questions = [
+    { question: 'What is 2 + 2?', answer: '4' },
+    { question: 'What is the capital of France?', answer: 'Paris' },
+    // Add more questions and answers here
+];
 
-function drawCar() {
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(carX, carY, carWidth, carHeight);
-}
+let currentQuestion = 0;
 
-function drawGame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawCar();
-    requestAnimationFrame(drawGame);
-}
+submitBtn.addEventListener('click', () => {
+    const userAnswer = answerInput.value.trim().toLowerCase();
+    const correctAnswer = questions[currentQuestion].answer.toLowerCase();
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft' && carX > 0) {
-        carX -= 10;
-    } else if (event.key === 'ArrowRight' && carX < canvas.width - carWidth) {
-        carX += 10;
+    if (userAnswer === correctAnswer) {
+        alert('Correct answer!');
+    } else {
+        alert('Wrong answer. Try again!');
+    }
+
+    // Move to the next question or end the game
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayNextQuestion();
+    } else {
+        alert('Game Over. You answered all the questions!');
+        // You can reset the game here if needed
     }
 });
 
-drawGame();
+function displayNextQuestion() {
+    question.textContent = questions[currentQuestion].question;
+    answerInput.value = '';
+}
+// Display the first question
+displayNextQuestion();
