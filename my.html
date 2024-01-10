@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors Game</title>
+    <style>
+        /* Basic styling for the game */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors Game</h1>
+    <p>Choose your move:</p>
+    <button onclick="playGame('rock')">Rock</button>
+    <button onclick="playGame('paper')">Paper</button>
+    <button onclick="playGame('scissors')">Scissors</button>
+    <p id="result"></p>
+
+    <script>
+        // JavaScript code for the game logic
+        function playGame(playerMove) {
+            const moves = ['rock', 'paper', 'scissors'];
+            const computerMove = moves[Math.floor(Math.random() * moves.length)];
+
+            let result;
+            if (playerMove === computerMove) {
+                result = "It's a tie!";
+            } else if (
+                (playerMove === 'rock' && computerMove === 'scissors') ||
+                (playerMove === 'paper' && computerMove === 'rock') ||
+                (playerMove === 'scissors' && computerMove === 'paper')
+            ) {
+                result = 'You win!';
+            } else {
+                result = 'Computer wins!';
+            }
+
+            document.getElementById('result').innerHTML = `You chose ${playerMove}. Computer chose ${computerMove}. ${result}`;
+        }
+    </script>
+</body>
+</html>
+
